@@ -10,11 +10,11 @@ Rime 粵語輸入方案 通過韻母變寫表示聲調。基於`rime-cantonese`�
 
 粵拼：
 
-> Ngo⁵ jau⁵ jat¹go³ pang⁴jau⁵ giu³zou⁶ Taam⁴ Bat¹ting⁴. Ni¹wai⁶ sin¹saang¹ zeoi³ zung¹ji³ gong²syut³waa⁶, so²ji⁵ jan⁴dei⁶ giu³ keoi⁵ zou⁶ Lau⁴sing¹gei¹, jau⁶ giu³ keoi⁵ zou⁶ Bo³jam¹toi⁴. Keoi⁵ je⁶maan⁵haak¹ fan³zoek⁶zo² zau⁶ faat³ hoi¹hau²mung⁶. Ziu¹tau⁴zou² jat¹ seng²zo² jau⁶ zi⁶gei² jat¹go³jan⁴ hai²syu³ gong²syut³waa⁶. Hei²san¹ ji⁵hau⁶ gin³ zo² jan⁴, gam²zau⁶ gang¹ m⁴sai² gong² la¹. 
+> Ngo⁵ jau⁵ jat¹go³ pang⁴jau⁵ giu³zou⁶ Taam⁴ Bat¹ting⁴. Ni¹wai⁶ sin¹saang¹ zeoi³ zung¹ji³ gong²syut³waa⁶, so²ji⁵ jan⁴dei⁶ giu³ keoi⁵ zou⁶ Lau⁴sing¹gei¹, jau⁶ giu³ keoi⁵ zou⁶ Bo³jam¹toi⁴. Keoi⁵ je⁶maan⁵haak¹ fan³zoek⁶zo² zau⁶ faat³ hoi¹hau²mung⁶. Ziu¹tau⁴zou² jat¹ seng²zo² jau⁶ zi⁶gei² jat¹go³jan⁴ hai²syu³ gong²syut³waa⁶. Hei²san¹ ji⁵hau⁶ gin³ zo² jan⁴, gam²zau⁶ gang3 m⁴sai² gong² la¹. 
 
 本方案：
 
-> Ngor jaru jratgov pangjaru givuzohu Taam Bratting. Nriway srinsraag zeovi zrung-jiv golng syutwaah, sowjir jandehi givu keori zohu Lausring-grei, jaw givu keori zohu Bovjramtoi. Keori jeh-maarn-hraak fannzoewk-zow zaw faat hroihauu-muhng. Zriutau-zouu jrat segnzow jaw zihgeii jratgov-jan haiisyuv golng syutwaah. Heiisran jirhaw ginn zow jan, gammzaw grang musaii golng lra. 
+> Ngor jaru jratgov pangjaru givuzohu Taam Bratting. Nriway srinsraag zeovi zrung-jiv golng syutwaah, sowjir jandehi givu keori zohu Lausring-grei, jaw givu keori zohu Bovjramtoi. Keori jeh-maarn-hraak fannzoewk-zow zaw faat hroihauu-muhng. Zriutau-zouu jrat segnzow jaw zihgeii jratgov-jan haiisyuv golng syutwaah. Heiisran jirhaw ginn zow jan, gammzaw ganq musaii golng lra. 
 
 粵語羅馬字：
 
