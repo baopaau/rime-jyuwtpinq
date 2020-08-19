@@ -1,0 +1,237 @@
+# Rime schema
+# encoding: utf-8
+
+schema:
+  schema_id: jyuwtpinq
+  name: 粵拼羅
+  version: "2020.07.15"
+  author:
+    - 抱豹 <baopaau@gmail.com>
+
+  description: |-
+    個人定製羅馬字方案，
+    以純字母完整表示粵語發音。
+    聲母與粵拼一致，通過韻母變寫表示聲調。
+    基於`rime-cantonese`碼表。
+
+  dependencies:
+    - jyut6ping3
+
+switches:
+  - name: ascii_mode
+    reset: 0
+    states: [ 中文, ASCII ]
+  - name: full_shape
+    states: [ 半形, 全形 ]
+  - options: [ noop, simplification, trad_tw, variants_hk, shin_jp ]
+    states: [ 原字, 陆简, 臺正, 港繁, 日新 ]
+    # 修改下行，改變預設用字 [0, 1, 2, 3 --> 對應上表]
+    reset: 0
+  - name: ascii_punct
+    states: [ '。，', '．，' ]
+  - name: emoji_suggestion
+    # 修改下行，預設啓動 emoji
+    states: [ 冇繪文字 , 帶繪文字 ]
+    reset: 1
+
+engine:
+  processors:
+    - ascii_composer
+    - recognizer
+    - key_binder
+    - speller
+    - punctuator
+    - selector
+    - navigator
+    - express_editor
+  segmentors:
+    - ascii_segmentor
+    - matcher
+    - abc_segmentor
+    - punct_segmentor
+    - fallback_segmentor
+  translators:
+    - punct_translator
+    - reverse_lookup_translator
+    - table_translator@custom_phrase
+    - script_translator
+  filters:
+    - simplifier@variants_hk
+    - simplifier@trad_tw
+    - simplifier@shin_jp
+    - simplifier
+    - simplifier@emoji_suggestion
+    - uniquifier
+    #- reverse_lookup_filter
+
+speller:
+  alphabet: zyxwvutsrqponmlkjihgfedcba
+  delimiter: " '"
+  algebra:
+    # 取消下兩行註釋，支援疑影不分
+    #- derive/^ng([aeiou])/$1/
+    #- derive/^([aeiou])/ng$1/
+
+    # 取消下行註釋，支援 n- 併入 l- ，如「你」讀若「理」
+    #- derive/^n(?!g)/l/
+
+    # 取消下行註釋，支援 gw-, kw- 併入 g-, k- ，如「國」讀若「各」、「廓」讀若「確」
+    #- derive/^(g|k)w/$1/
+
+    # 取消下行註釋，支援獨立鼻音韻 ng 併入 m，如「吳」讀若「唔」
+    #- derive/^ng([123456])$/m$1/
+
+    - derive/[123456]//           # 忽略聲調
+    
+    # `rime-cantonese`方案，粵拼尾帶聲調
+    - derive/1/v/                  # 陰平
+    - derive/4/vv/                 # 陽平
+    - derive/2/x/                  # 陰上
+    - derive/5/xx/                 # 陽上
+    - derive/3/q/                  # 陰去
+    - derive/6/qq/                 # 陽去
+    
+    - derive/^([aeiou])/q$1/      # 增加 q 表示喉塞
+    
+    - derive/^jy?([aeiou])/y$1/   # 容錯 je -> ye, jyu -> yu
+    - derive/^jyu/ju/             # 容錯 jyu -> ju
+    - derive/yu/y/                # 容錯 jyu -> jy
+
+    # 聲調羅馬化
+    - xform/\<(m|ng)1\>/r$1/
+    - xform/\<(m|ng)2\>/$1l/
+    - xform/\<(m|ng)3\>/$1v/
+    - xform/\<(m|ng)4\>/$1/
+    - xform/\<(m|ng)5\>/$1r/
+    - xform/\<(m|ng)6\>/$1h/
+    - xform/(yu|aa|oe|eo|[aeiou])(|[ium]|ng?)1\>/r$1$2/
+    - xform/(yu|aa|oe|eo|[aeiou])(|[ium]|ng?)2\>/$1w$2/
+    - xform/(yu|aa|oe|eo|[aeiou])(|[ium]|ng?)3\>/$1v$2/
+    - xform/(yu|aa|oe|eo|[aeiou])(|[ium]|ng?)4\>/$1$2/
+    - xform/(yu|aa|oe|eo|[aeiou])(|[ium]|ng?)5\>/$1r$2/
+    - xform/(yu|aa|oe|eo|[aeiou])(|[ium]|ng?)6\>/$1h$2/
+    - xform/(yu|aa|oe|eo|[aeiou])([ptk])1\>/r$1$2/
+    - xform/(yu|aa|oe|eo|[aeiou])([ptk])3\>/$1$2/
+    - xform/(yu|aa|oe|eo|[aeiou])([ptk])6\>/$1w$2/
+    - xform/\<r([eiounm])/$1$1/
+    - xform/\<raa\>/ara/
+    - xform/\<ra\>/ala/
+    
+    - xform/(yu|aa|oe|[aeiu])wng\>/$1gn/
+    - xform/(e?o)wng\>/$1lng/
+    - xform/(yu|aa|oe|eo|[aeiou])wi\>/$1ii/
+    - xform/(yu|aa|oe|eo|[aeiou])wu\>/$1uu/
+    - xform/(yu|aa|oe|eo|[aeiou])vm\>/$1mm/
+    - xform/(yu|aa|oe|eo|[aeiou])vn\>/$1nn/
+    - xform/(yu|aa|oe|eo|[aeiou])vng\>/$1nq/
+    - xform/(yu|aa|oe|eo)hng\>/$1qn/
+    - xform/ahi\>/ay/
+    - xform/ahu\>/aw/
+    - xform/av/ae/
+    
+    - xform/(yu|aa|oe|eo)ng\>/$1g/
+    - xform/(yu|aa|oe|eo)rng\>/$1rg/
+    
+    # 轉寫完成
+    
+    - derive/eoi$/oey/            # 容錯
+    - derive/eoi$/eoy/            # 容錯
+    - derive/eo/oe/               # 容錯 eo/oe 不分
+    - derive/oe(ng|k)$/eo$1/      # 容錯
+    - derive/ou$/uo/              # 容錯
+    - derive/aa$/a/               # 容錯
+    - abbrev/^([a-z]).+$/$1/      # 首字母簡拼
+    - abbrev/^([a-z]{2}).+$/$1/   # 首2字母簡拼
+
+translator:
+  dictionary: jyut6ping3
+  prism: jyut6ping3_test
+  spelling_hints: 8
+  comment_format: &format
+    - xform/\<(m|ng)1\>/r$1/
+    - xform/\<(m|ng)2\>/$1l/
+    - xform/\<(m|ng)3\>/$1v/
+    - xform/\<(m|ng)4\>/$1/
+    - xform/\<(m|ng)5\>/$1r/
+    - xform/\<(m|ng)6\>/$1h/
+    - xform/(yu|aa|oe|eo|[aeiou])(|[ium]|ng?)1\>/r$1$2/
+    - xform/(yu|aa|oe|eo|[aeiou])(|[ium]|ng?)2\>/$1w$2/
+    - xform/(yu|aa|oe|eo|[aeiou])(|[ium]|ng?)3\>/$1v$2/
+    - xform/(yu|aa|oe|eo|[aeiou])(|[ium]|ng?)4\>/$1$2/
+    - xform/(yu|aa|oe|eo|[aeiou])(|[ium]|ng?)5\>/$1r$2/
+    - xform/(yu|aa|oe|eo|[aeiou])(|[ium]|ng?)6\>/$1h$2/
+    - xform/(yu|aa|oe|eo|[aeiou])([ptk])1\>/r$1$2/
+    - xform/(yu|aa|oe|eo|[aeiou])([ptk])3\>/$1$2/
+    - xform/(yu|aa|oe|eo|[aeiou])([ptk])6\>/$1w$2/
+    - xform/\<r([eiounm])/$1$1/
+    - xform/\<raa\>/ara/
+    - xform/\<ra\>/ala/
+    
+    - xform/(yu|aa|oe|[aeiu])wng\>/$1gn/
+    - xform/(e?o)wng\>/$1lng/
+    - xform/(yu|aa|oe|eo|[aeiou])wi\>/$1ii/
+    - xform/(yu|aa|oe|eo|[aeiou])wu\>/$1uu/
+    - xform/(yu|aa|oe|eo|[aeiou])vm\>/$1mm/
+    - xform/(yu|aa|oe|eo|[aeiou])vn\>/$1nn/
+    - xform/(yu|aa|oe|eo|[aeiou])vng\>/$1nq/
+    - xform/(yu|aa|oe|eo)hng\>/$1qn/
+    - xform/ahi\>/ay/
+    - xform/ahu\>/aw/
+    - xform/av/ae/
+    
+    - xform/(yu|aa|oe|eo)ng\>/$1g/
+    - xform/(yu|aa|oe|eo)rng\>/$1rg/
+  
+custom_phrase:
+  dictionary: ""
+  user_dict: custom_phrase
+  db_class: stabledb
+  enable_completion: false
+  enable_sentence: false
+  initial_quality: 1
+  
+reverse_lookup:
+  overwrite_comment: true
+  dictionary: jyut6ping3
+  prism: jyut6ping3
+  prefix: "v"
+  suffix: "'"
+  tips: 〔粵拼〕
+  comment_format: *format
+  preedit_format:
+    - xform/([aeioumngptk])vv/${1}4/
+    - xform/([aeioumngptk])xx/${1}5/
+    - xform/([aeioumngptk])qq/${1}6/
+    - xform/([aeioumngptk])v/${1}1/
+    - xform/([aeioumngptk])x/${1}2/
+    - xform/([aeioumngptk])q/${1}3/
+    - xlit/123456/¹²³⁴⁵⁶/
+
+trad_tw:
+  option_name: trad_tw
+  opencc_config: t2tw.json
+  
+variants_hk:
+  option_name: variants_hk
+  opencc_config: t2hkf.json
+  
+shin_jp:
+  option_name: shin_jp
+  opencc_config: t2jp.json
+
+emoji_suggestion:
+  opencc_config: emoji.json
+  option_name: emoji_suggestion
+  tips: all
+
+punctuator:
+  import_preset: symbols_cantonese
+
+key_binder:
+  import_preset: default
+
+recognizer:
+  import_preset: default
+  patterns:
+    punct: "^/([0-9]0?|[a-z]+)$"
+    reverse_lookup: "^v[a-z]*'?$|[a-z]+'$"
