@@ -14,7 +14,7 @@ Rime 粵語輸入方案 通過韻母變寫表示聲調。基於`rime-cantonese`�
 
 本方案：
 
-> Ngor jaru jratgov pangjaru givuzohu Taam Bratting. Nriway srinsraag zeovi zrung-jiv golng syutwaah, sowjir jandehi givu keori zohu Lausring-grei, jaw givu keori zohu Bovjramtoi. Keori jeh-maarn-hraak fannzoewk-zow zaw faat hroihauu-muhng. Zriutau-zouu jrat segnzow jaw zihgeii jratgov-jan haiisyuv golng syutwaah. Heiisran jirhaw ginn zow jan, gammzaw ganq musaii golng lra. 
+> Ngor jaru jratgov pangjaru givuzohu Taam Bratting. Nriway srinsraag zeoy zrung-jiv golng syutwaah, sowjir jandehi givu keori zohu Lausring-grei, jaw givu keori zohu Bovjramtoi. Keori jeh-maarn-hraak fannzoewk-zow zaw faat hroihauu-muhng. Zriutau-zouu jrat segnzow jaw zihgeii jratgov-jan haiisyuv golng syutwaah. Heiisran jirhaw ginn zow jan, gammzaw ganq musaii golng lra. 
 
 粵語羅馬字：
 
